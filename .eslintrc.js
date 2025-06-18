@@ -1,17 +1,36 @@
+// .eslintrc.js
 module.exports = {
   root: true,
   env: {
-    node: true,
+    browser: true,
+    es2021: true,
   },
   extends: [
-    'plugin:vue/vue3-essential',
-    '@vue/airbnb',
+    'airbnb-base',
+    'plugin:vue/vue3-recommended', // only if using Vue 3
   ],
+  plugins: ['vue'],
   parserOptions: {
-    parser: '@babel/eslint-parser',
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    // Customize Airbnb rules if needed
+    'no-console': 'off',
+    'import/extensions': ['error', 'always', {
+      js: 'never',
+      vue: 'never',
+    }],
+    'import/no-extraneous-dependencies': ['error', {
+      devDependencies: [
+        '**/*.test.js',
+        '**/*.spec.js',
+        '**/vite.config.js',
+        '**/webpack.config.js',
+      ],
+      optionalDependencies: false,
+      peerDependencies: false,
+      packageDir: ['./'], // ensure ESLint resolves packages correctly
+    }],
   },
 };
